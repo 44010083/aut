@@ -1,5 +1,2 @@
-springboot+rest api" project
-|
-|--src
-    |-main/java
-    |-test/java
+近些年来，各大大小小的软件开发项目组都陆续进入“前后端分离、后端接口化、微服务化”，
+颇有“springboot +REST api”遍地开花的局势。
