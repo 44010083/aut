@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ParseSrcUtil {
+public class Src2ApisUtil {
     /*
     分析指定路径下的代码，得到结构化的api模型数据，同时输出每个接口的ut用例输入输出数据模型
     api模型数据：List<ApiModel>

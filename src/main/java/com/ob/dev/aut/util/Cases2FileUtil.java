@@ -7,10 +7,12 @@ import com.ob.dev.aut.model.UtCase;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-public class CreateTestFilesUtil {
+public class Cases2FileUtil {
+    //创建测试代码文件
     public static void mkTestFile(String baseTestPath, ApiModel api, List<UtCase> cases) {
         //如果api没有测试用例，直接返回
         if (cases.size() == 0) {
@@ -51,7 +53,7 @@ public class CreateTestFilesUtil {
                 writer.close();
             }
             //将每个测试文件都写到备份的ut/cases路径下
-            String utFileStr = baseTestPath.substring(0, baseTestPath.length() - "/src/test/java".length()) + "/ut/cases" + filePath;
+            String utFileStr = baseTestPath.substring(0, baseTestPath.length() - "/src/test/java".length()) + "/src/cases/ut/backup" + filePath;
             File utFile = new File(utFileStr);
             if (!utFile.getParentFile().exists()) {
                 utFile.getParentFile().mkdirs();

@@ -3,8 +3,9 @@ package com.ob.dev.aut;
 
 import com.ob.dev.aut.model.ApiModel;
 import com.ob.dev.aut.model.UtCase;
-import com.ob.dev.aut.util.CreateTestFilesUtil;
-import com.ob.dev.aut.util.ParseSrcUtil;
+import com.ob.dev.aut.util.Apis2FileUtil;
+import com.ob.dev.aut.util.Cases2FileUtil;
+import com.ob.dev.aut.util.Src2ApisUtil;
 import com.ob.dev.aut.util.UtFiles2CasesUtil;
 
 import java.io.File;
@@ -54,8 +55,8 @@ public class AutApplication {
         if (doCreateUt) {
             String path = userDir + "/src/main/java";
             String testsPath = userDir + "/src/test/java";
-            String dataPath = userDir + "/ut/data";
-            String modulePath = userDir + "/ut/module";
+            String dataPath = userDir + "/src/cases/ut/data";
+            String modulePath = userDir + "/src/cases/ut/module";
 
 
             if (System.getProperty("rewrite.tests") != null && "true".equalsIgnoreCase(System.getProperty("rewrite.tests"))) {
@@ -64,8 +65,9 @@ public class AutApplication {
                 System.out.println("********* info: if you want to rewrite testfile when has the same,run with java -Drewrite.tests=true");
             }
             //分析源码文件，获得api接口
-            List<ApiModel> apis = ParseSrcUtil.parseByPath(path, modulePath);
-
+            List<ApiModel> apis = Src2ApisUtil.parseByPath(path, modulePath);
+            //将得到的所有测试用例结构化数据写入文件
+            Apis2FileUtil.mkApisInfoFile(modulePath + "/apis-info.json", apis);
             //生成每个API的ut代码
             for (ApiModel apiModel : apis) {
                 String apiDataPath = dataPath + "/" + apiModel.getPackageName().replaceAll("\\.", "/");
@@ -73,7 +75,7 @@ public class AutApplication {
                 //获得api的测试用例数据
                 List<UtCase> cases = UtFiles2CasesUtil.getCases(apiDataPath);
                 //生成测试代码文件
-                CreateTestFilesUtil.mkTestFile(testsPath, apiModel, cases);
+                Cases2FileUtil.mkTestFile(testsPath, apiModel, cases);
             }
         }
 
