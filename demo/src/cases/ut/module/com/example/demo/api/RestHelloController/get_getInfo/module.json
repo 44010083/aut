@@ -1,0 +1,15 @@
+{
+	"in": [
+		{
+			"t":"var",
+			"n":"name",
+			"v":"String"
+		},
+		{
+			"t":"var",
+			"n":"id",
+			"v":"Integer"
+		}
+	],
+	"out": ""
+}
