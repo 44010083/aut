@@ -2,6 +2,7 @@ package com.example.demo.api;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.model.ArgsModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,14 @@ public class RestHelloController {
         return iHelloService.getInfo(name) + ":" + (id + 0);
     }
 
+    @RequestMapping(value = "/hello/body2", method = RequestMethod.GET)
+    public ArgsModel helloBody2(@RequestBody ArgsModel vo) {
+        return vo;
+    }
+    @RequestMapping(value = "/hello/body2", method = RequestMethod.POST)
+    public ArgsModel helloBody3(@RequestBody ArgsModel vo) {
+        return vo;
+    }
     @RequestMapping(value = "/hello/body", method = RequestMethod.GET)
     public JSONObject helloBody(@RequestBody JSONObject vo) {
         return vo;
